@@ -71,12 +71,19 @@ class SettingsController {
 
     // Enable toggle
     const enabledCheckbox = document.getElementById('llmEnabled') as HTMLInputElement;
-    enabledCheckbox?.addEventListener('change', () => {
+    enabledCheckbox?.addEventListener('change', async () => {
       const llmConfigDiv = document.getElementById('llmConfig');
       if (enabledCheckbox.checked) {
         llmConfigDiv?.classList.remove('hidden');
       } else {
         llmConfigDiv?.classList.add('hidden');
+      }
+
+      // Auto-save the enabled state
+      if (this.config) {
+        this.config.enabled = enabledCheckbox.checked;
+        await ConfigManager.saveLLMConfig(this.config);
+        console.log('LLM enabled state saved:', enabledCheckbox.checked);
       }
     });
 
