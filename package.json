@@ -1,0 +1,19 @@
+{
+  "name": "english-learning-extension",
+  "version": "1.0.0",
+  "description": "Chrome extension for learning English by selecting words and building vocabulary diary",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npm run bundle && npm run copy-assets",
+    "bundle": "esbuild src/content.ts --bundle --outfile=dist/content.js --format=iife && esbuild src/background.ts --bundle --outfile=dist/background.js --format=iife && esbuild src/popup.ts --bundle --outfile=dist/popup.js --format=iife && esbuild src/recall-page.ts --bundle --outfile=dist/recall-page.js --format=iife && esbuild src/settings.ts --bundle --outfile=dist/settings.js --format=iife",
+    "copy-assets": "node -e \"const fs=require('fs'); const path=require('path'); ['manifest.json', 'popup', 'styles', 'icons'].forEach(f => { const src=path.join(__dirname, f); const dest=path.join(__dirname, 'dist', f); if(fs.existsSync(src)){ if(fs.lstatSync(src).isDirectory()){ fs.cpSync(src, dest, {recursive: true}); } else { fs.copyFileSync(src, dest); } } });\"",
+    "watch": "tsc --watch",
+    "clean": "node -e \"const fs=require('fs'); const path=require('path'); const dist=path.join(__dirname, 'dist'); if(fs.existsSync(dist)){ fs.rmSync(dist, {recursive: true}); }\""
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.270",
+    "esbuild": "^0.27.0",
+    "typescript": "^5.5.3"
+  },
+  "private": true
+}

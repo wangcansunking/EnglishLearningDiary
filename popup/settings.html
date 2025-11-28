@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - English Learning Assistant</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <button id="backBtn" class="back-btn">← Back</button>
+      <h1>⚙️ Settings</h1>
+    </header>
+
+    <div class="content">
+      <div class="section">
+        <h2>Export & Import Settings</h2>
+        <p class="description">Manage your vocabulary diary data and configuration.</p>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="includeConfigInExport" class="checkbox-input">
+            <span class="checkbox-text">Include LLM configuration when exporting diary</span>
+          </label>
+          <small class="help-text">Note: API key will never be exported for security reasons. Only endpoint, model, and temperature will be included.</small>
+        </div>
+
+        <div class="button-group">
+          <button id="exportBtn" class="primary-btn">📥 Export Diary</button>
+          <button id="importBtn" class="secondary-btn">📤 Import Diary</button>
+        </div>
+        <input type="file" id="importFile" accept=".json" style="display: none;">
+
+        <div id="exportResult" class="test-result hidden"></div>
+      </div>
+
+      <div class="section">
+        <h2>LLM API Configuration</h2>
+        <p class="description">Configure your own LLM API endpoint for dictionary lookups. If not configured, the extension will use the default dictionary API.</p>
+
+        <div class="form-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="llmEnabled" class="toggle-input">
+            <span class="toggle-slider"></span>
+            <span class="toggle-text">Enable LLM API</span>
+          </label>
+        </div>
+
+        <div id="llmConfig" class="llm-config hidden">
+          <div class="form-group">
+            <label for="llmEndpoint">API Endpoint</label>
+            <input type="text" id="llmEndpoint" placeholder="https://api.openai.com/v1/chat/completions" class="input-field">
+            <small class="help-text">OpenAI-compatible chat completion endpoint</small>
+          </div>
+
+          <div class="form-group">
+            <label for="llmApiKey">API Key</label>
+            <input type="password" id="llmApiKey" placeholder="sk-..." class="input-field">
+            <small class="help-text">Your API key (stored locally only)</small>
+          </div>
+
+          <div class="form-group">
+            <label for="llmModel">Model (Optional)</label>
+            <input type="text" id="llmModel" placeholder="gpt-3.5-turbo" class="input-field">
+            <small class="help-text">Leave empty to use default model</small>
+          </div>
+
+          <div class="form-group">
+            <label for="llmTemperature">Temperature</label>
+            <input type="number" id="llmTemperature" placeholder="0.3" min="0" max="2" step="0.1" class="input-field">
+            <small class="help-text">Controls randomness (0.0-2.0). Lower is more focused, higher is more creative.</small>
+          </div>
+
+          <div class="button-group">
+            <button id="testBtn" class="secondary-btn">Test Connection</button>
+            <button id="saveBtn" class="primary-btn">Save Configuration</button>
+          </div>
+
+          <div id="testResult" class="test-result hidden"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>About</h2>
+        <p class="description">English Learning Assistant v1.0.0</p>
+        <p class="description">Select words on any webpage to learn their meanings, build your vocabulary diary, and practice with daily recall challenges.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../settings.js"></script>
+</body>
+</html>

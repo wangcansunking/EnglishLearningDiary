@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Icon Generator</title>
+</head>
+<body>
+  <h1>Icon Generator</h1>
+  <p>Open this file in a browser to generate PNG icons</p>
+  <button onclick="generateIcons()">Generate Icons</button>
+  <div id="output"></div>
+
+  <script>
+    function generateIcons() {
+      const sizes = [16, 48, 128];
+      const output = document.getElementById('output');
+      output.innerHTML = '';
+
+      sizes.forEach(size => {
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+
+        // Create gradient background
+        const gradient = ctx.createLinearGradient(0, 0, size, size);
+        gradient.addColorStop(0, '#667eea');
+        gradient.addColorStop(1, '#764ba2');
+
+        // Draw rounded rectangle background
+        const radius = size * 0.1875; // 24/128 ratio
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.roundRect(0, 0, size, size, radius);
+        ctx.fill();
+
+        // Draw 'E' text
+        ctx.fillStyle = 'white';
+        ctx.font = `bold ${size * 0.625}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('E', size / 2, size * 0.65);
+
+        // Draw underline curve
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = size * 0.03125; // 4/128 ratio
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(size * 0.25, size * 0.82);
+        ctx.quadraticCurveTo(size * 0.5, size * 0.74, size * 0.75, size * 0.82);
+        ctx.stroke();
+
+        // Create download link
+        canvas.toBlob(blob => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `icon${size}.png`;
+          a.textContent = `Download icon${size}.png`;
+          a.style.display = 'block';
+          a.style.margin = '10px';
+          output.appendChild(a);
+        });
+
+        // Show preview
+        canvas.style.border = '1px solid #ccc';
+        canvas.style.margin = '10px';
+        output.appendChild(canvas);
+      });
+    }
+  </script>
+</body>
+</html>

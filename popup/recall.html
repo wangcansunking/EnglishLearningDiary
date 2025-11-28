@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Today's Words - Recall Challenge</title>
+  <link rel="stylesheet" href="recall.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <button id="backBtn" class="back-btn">← Back</button>
+      <h1>📝 Today's Words</h1>
+      <div class="progress-info">
+        <span id="progressText">0/10</span>
+      </div>
+    </header>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="screen">
+      <div class="start-content">
+        <div class="icon">🎯</div>
+        <h2>Daily Recall Challenge</h2>
+        <p>Test your memory with 10 words from your learning diary!</p>
+        <div class="features">
+          <div class="feature-item">✓ Selected based on what you need to review</div>
+          <div class="feature-item">✓ Simple multiple-choice questions</div>
+          <div class="feature-item">✓ Track your progress over time</div>
+        </div>
+        <button id="startBtn" class="primary-btn">Start Challenge</button>
+      </div>
+    </div>
+
+    <!-- No Words Screen -->
+    <div id="noWordsScreen" class="screen hidden">
+      <div class="empty-content">
+        <div class="icon">📚</div>
+        <h2>No Words Yet</h2>
+        <p>You need at least one word in your diary to start the recall challenge.</p>
+        <p>Start adding words by selecting them on any webpage!</p>
+        <button id="backToHomeBtn" class="primary-btn">Go to Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="quizScreen" class="screen hidden">
+      <div class="quiz-content">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+
+        <!-- Score -->
+        <div class="score-display">
+          Score: <span id="scoreText">0</span>/<span id="totalQuestions">10</span>
+        </div>
+
+        <!-- Question Card -->
+        <div class="question-card">
+          <div class="question-number">Question <span id="questionNumber">1</span></div>
+          <h3 id="questionText" class="question-text"></h3>
+
+          <!-- Word Info -->
+          <div id="wordInfo" class="word-info">
+            <div class="word-display">
+              <span id="wordText" class="word-text"></span>
+              <span id="phoneticText" class="phonetic-text"></span>
+            </div>
+          </div>
+
+          <!-- Options -->
+          <div id="optionsContainer" class="options-container">
+            <!-- Options will be inserted here -->
+          </div>
+
+          <!-- Feedback -->
+          <div id="feedback" class="feedback hidden">
+            <div id="feedbackIcon" class="feedback-icon"></div>
+            <div id="feedbackText" class="feedback-text"></div>
+            <div id="feedbackDetail" class="feedback-detail"></div>
+            <button id="nextBtn" class="primary-btn">Next Question →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="resultsScreen" class="screen hidden">
+      <div class="results-content">
+        <div class="results-icon" id="resultsIcon">🎉</div>
+        <h2>Challenge Complete!</h2>
+        <div class="final-score">
+          <div class="score-number">
+            <span id="finalScore">0</span>/<span id="finalTotal">10</span>
+          </div>
+          <div class="score-percentage" id="scorePercentage">0%</div>
+        </div>
+        <div id="resultMessage" class="result-message"></div>
+        <div class="results-actions">
+          <button id="reviewBtn" class="primary-btn">Review Words</button>
+          <button id="doneBtn" class="secondary-btn">Back to Dashboard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../recall-page.js"></script>
+</body>
+</html>

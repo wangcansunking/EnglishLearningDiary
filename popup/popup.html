@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Learning Diary</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-left">
+        <h1>📚 Learning Diary</h1>
+        <div class="stats">
+          <span id="wordCount">0 words</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <button id="settingsBtn" class="header-btn" title="Settings">⚙️ Settings</button>
+        <button id="recallBtn" class="recall-btn" title="Today's Words Challenge">
+          📝 Today's Words
+        </button>
+      </div>
+    </header>
+
+    <div class="controls">
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="day">Today</button>
+        <button class="filter-btn" data-filter="week">This Week</button>
+        <button class="filter-btn" data-filter="month">This Month</button>
+        <button class="filter-btn" data-filter="year">This Year</button>
+      </div>
+    </div>
+
+    <div id="wordsList" class="words-list">
+      <!-- Word cards will be inserted here -->
+    </div>
+
+    <div id="emptyState" class="empty-state">
+      <p>No words in your diary yet.</p>
+      <p>Select a word on any webpage to get started!</p>
+    </div>
+  </div>
+
+  <script src="../popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!--
+  Placeholder SVG icon for the Chrome extension
+  Replace this with your custom icon design
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" fill="url(#grad)" rx="24"/>
+  <text x="64" y="88" font-family="Arial, sans-serif" font-size="80" font-weight="bold" text-anchor="middle" fill="white">E</text>
+  <path d="M 32 105 Q 64 95 96 105" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+</svg>
