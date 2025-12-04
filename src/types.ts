@@ -5,6 +5,7 @@ export interface WordDefinition {
     definition: string;
     example?: string;
     chineseTranslation?: string;
+    exampleChineseTranslation?: string;
   }[];
 }
 

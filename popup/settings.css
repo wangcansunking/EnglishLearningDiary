@@ -281,3 +281,76 @@ header h1 {
   color: #333;
   line-height: 1.5;
 }
+
+/* Migration Status */
+.migration-status {
+  margin-bottom: 16px;
+}
+
+.migration-info {
+  padding: 12px;
+  background: #e3f2fd;
+  border: 1px solid #90caf9;
+  border-radius: 6px;
+  color: #1565c0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.migration-info.success {
+  background: #e8f5e9;
+  border-color: #a5d6a7;
+  color: #2e7d32;
+}
+
+.migration-info.error {
+  background: #ffebee;
+  border-color: #ef9a9a;
+  color: #c62828;
+}
+
+/* Migration Progress */
+.migration-progress {
+  margin-top: 16px;
+}
+
+.migration-progress.hidden {
+  display: none;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 24px;
+  background: #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
+.progress-text {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  font-family: monospace;
+}
+
+/* Disabled button style */
+.primary-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.primary-btn:disabled:hover {
+  background: #ccc;
+  transform: none;
+  box-shadow: none;
+}

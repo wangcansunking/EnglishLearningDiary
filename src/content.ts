@@ -151,8 +151,9 @@ class WordSelector {
               <div class="definition-number">${idx + 1}.</div>
               <div class="definition-content">
                 <p class="definition-text">${def.definition}</p>
-                ${def.chineseTranslation ? `<p class="chinese-translation">中文: ${def.chineseTranslation}</p>` : ''}
+                ${def.chineseTranslation ? `<p class="chinese-translation">${def.chineseTranslation}</p>` : ''}
                 ${def.example ? `<p class="example"><em>Example: ${def.example}</em></p>` : ''}
+                ${def.exampleChineseTranslation ? `<p class="chinese-translation">${def.exampleChineseTranslation}</p>` : ''}
               </div>
             </div>
           `).join('')}

@@ -1,6 +1,7 @@
 import { ConfigManager, LLMConfig, ExportSettings } from './config';
 import { DictionaryAPI } from './api';
 import { StorageManager } from './storage';
+import { DiaryMigration } from './migration';
 
 class SettingsController {
   private config: LLMConfig | null = null;
@@ -12,6 +13,7 @@ class SettingsController {
 
   private async init() {
     await this.loadConfig();
+    await this.checkMigrationStatus();
     this.attachEventListeners();
   }
 
@@ -68,6 +70,10 @@ class SettingsController {
     backBtn?.addEventListener('click', () => {
       window.location.href = 'popup.html';
     });
+
+    // Migration button
+    const migrationBtn = document.getElementById('migrationBtn');
+    migrationBtn?.addEventListener('click', () => this.runMigration());
 
     // Enable toggle
     const enabledCheckbox = document.getElementById('llmEnabled') as HTMLInputElement;
@@ -311,6 +317,80 @@ class SettingsController {
 
     // Reset input
     input.value = '';
+  }
+
+  private async checkMigrationStatus() {
+    const migrationInfo = document.getElementById('migrationInfo');
+    const migrationBtn = document.getElementById('migrationBtn') as HTMLButtonElement;
+
+    if (!migrationInfo || !migrationBtn) return;
+
+    try {
+      const wordsNeedingMigration = await DiaryMigration.checkMigrationNeeded();
+      const totalWords = (await StorageManager.getAllWords()).length;
+
+      if (wordsNeedingMigration === 0) {
+        migrationInfo.textContent = `✓ All ${totalWords} words are up to date!`;
+        migrationInfo.className = 'migration-info success';
+        migrationBtn.disabled = true;
+      } else {
+        migrationInfo.textContent = `${wordsNeedingMigration} out of ${totalWords} words need Chinese translations for definitions and/or examples.`;
+        migrationInfo.className = 'migration-info';
+        migrationBtn.disabled = false;
+      }
+    } catch (error) {
+      migrationInfo.textContent = `Error checking migration status: ${error instanceof Error ? error.message : 'Unknown error'}`;
+      migrationInfo.className = 'migration-info error';
+    }
+  }
+
+  private async runMigration() {
+    const migrationBtn = document.getElementById('migrationBtn') as HTMLButtonElement;
+    const migrationProgress = document.getElementById('migrationProgress');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const migrationResult = document.getElementById('migrationResult');
+
+    if (!migrationBtn || !migrationProgress || !progressFill || !progressText || !migrationResult) return;
+
+    // Confirm with user
+    const wordsNeedingMigration = await DiaryMigration.checkMigrationNeeded();
+    if (!confirm(`This will add Chinese translations for definitions and example sentences for ${wordsNeedingMigration} words. This may take several minutes. Continue?`)) {
+      return;
+    }
+
+    // Disable button and show progress
+    migrationBtn.disabled = true;
+    migrationProgress.classList.remove('hidden');
+    migrationResult.classList.add('hidden');
+
+    try {
+      const stats = await DiaryMigration.migrateAllWords((current, total, word) => {
+        // Update progress
+        const percentage = Math.round((current / total) * 100);
+        progressFill.style.width = `${percentage}%`;
+        progressText.textContent = `${current} / ${total} - ${word}`;
+      });
+
+      // Show success result
+      migrationResult.className = 'test-result success';
+      migrationResult.textContent = `✓ Migration complete! Updated ${stats.updated} words, skipped ${stats.skipped} (already up to date)${stats.errors > 0 ? `, ${stats.errors} errors` : ''}.`;
+      migrationResult.classList.remove('hidden');
+
+      // Update migration status
+      await this.checkMigrationStatus();
+
+      // Hide progress after a delay
+      setTimeout(() => {
+        migrationProgress.classList.add('hidden');
+      }, 2000);
+    } catch (error) {
+      migrationResult.className = 'test-result error';
+      migrationResult.textContent = `✗ Migration failed: ${error instanceof Error ? error.message : 'Unknown error'}`;
+      migrationResult.classList.remove('hidden');
+
+      migrationBtn.disabled = false;
+    }
   }
 }
 

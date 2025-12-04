@@ -39,14 +39,15 @@ export class DictionaryAPI {
         {
           "definition": "English definition",
           "example": "Example sentence using the word",
-          "chineseTranslation": "Chinese translation of the definition"
+          "chineseTranslation": "Chinese translation of the definition",
+          "exampleChineseTranslation": "Chinese translation of the example sentence"
         }
       ]
     }
   ]
 }
 
-Please provide up to 3 definitions per part of speech, with examples and Chinese translations for each definition.`;
+Please provide up to 3 definitions per part of speech, with examples and Chinese translations for both the definition and the example sentence.`;
 
     try {
       const response = await fetch(config.endpoint, {
@@ -129,10 +130,16 @@ Please provide up to 3 definitions per part of speech, with examples and Chinese
           // Get Chinese translation for the definition
           const chineseTranslation = await this.translateToChineseWithGoogle(def.definition);
 
+          // Get Chinese translation for the example if it exists
+          const exampleChineseTranslation = def.example
+            ? await this.translateToChineseWithGoogle(def.example)
+            : undefined;
+
           definitions.push({
             definition: def.definition,
             example: def.example,
-            chineseTranslation: chineseTranslation
+            chineseTranslation: chineseTranslation,
+            exampleChineseTranslation: exampleChineseTranslation
           });
         }
 

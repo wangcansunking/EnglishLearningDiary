@@ -15,6 +15,30 @@
 
     <div class="content">
       <div class="section">
+        <h2>Data Migration</h2>
+        <p class="description">Update existing words to include Chinese translations for both definitions and example sentences.</p>
+
+        <div id="migrationStatus" class="migration-status">
+          <div id="migrationInfo" class="migration-info">
+            Checking migration status...
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button id="migrationBtn" class="primary-btn" disabled>🔄 Migrate All Words</button>
+        </div>
+
+        <div id="migrationProgress" class="migration-progress hidden">
+          <div class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+          <div id="progressText" class="progress-text">0 / 0</div>
+        </div>
+
+        <div id="migrationResult" class="test-result hidden"></div>
+      </div>
+
+      <div class="section">
         <h2>Export & Import Settings</h2>
         <p class="description">Manage your vocabulary diary data and configuration.</p>
 

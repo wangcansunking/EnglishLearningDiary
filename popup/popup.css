@@ -99,6 +99,55 @@ header h1 {
   border-bottom: 1px solid #e0e0e0;
 }
 
+/* Word Lookup */
+.word-lookup {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.word-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.word-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.word-input::placeholder {
+  color: #999;
+}
+
+.lookup-btn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.lookup-btn:hover {
+  background: #5568d3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.lookup-btn:active {
+  transform: translateY(0);
+}
+
 .filter-buttons {
   display: flex;
   gap: 8px;
